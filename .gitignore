@@ -63,3 +63,6 @@ libeep-3.3.177/
 
 # Custom user files
 get-pip.py
+SeleST_initialize.py
+SeleST_run.py
+SeleST.py
