@@ -62,7 +62,8 @@ def Block(exp,trialInfo):
 #        thisTrial = trialInfo.trialList[trialInfo.trialCount-1]
         trigger_code = trialInfo.blockCount+20
         
-        exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#        exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+        exp.ser.write(bytes([trigger_code]))
         timestamp = exp.trialClock.getTime()
 
         exp.trigger_log.write(
@@ -231,7 +232,8 @@ def runTrial(exp,stimuli,thisTrial,trialStimuli,trialTimer):
              if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for left response                          
 #                exp.ser.write('WRITE 3 5000 0\n'.encode('utf-8'))
                 trigger_code = 3
-                exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#                exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+                exp.ser.write(bytes([trigger_code]))
                 timestamp = exp.trialClock.getTime()
                 exp.trigger_log.write(
                     f"{timestamp:.6f}\t'nan'\t'L_press'\t{trigger_code}\n" # HARDCODING
@@ -247,7 +249,8 @@ def runTrial(exp,stimuli,thisTrial,trialStimuli,trialTimer):
              if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for right response                
 #                exp.ser.write('WRITE 4 5000 0\n'.encode('utf-8'))                             
                 trigger_code = 4
-                exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#                exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+                exp.ser.write(bytes([trigger_code]))
                 timestamp = exp.trialClock.getTime()
                 exp.trigger_log.write(
                     f"{timestamp:.6f}\t'nan'\t'R_press'\t{trigger_code}\n" # HARDCODING
@@ -294,9 +297,10 @@ def stop_signal(exp,stimuli,thisTrial,trialStimuli):
 
     if thisTrial.stopSignal == True:
         if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for stop signal
-            exp.ser.write('WRITE 5 5000 0\n'.encode('utf-8'))
+#            exp.ser.write('WRITE 5 5000 0\n'.encode('utf-8'))
             trigger_code = 5
-            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+            exp.ser.write(bytes([trigger_code]))
             timestamp = exp.trialClock.getTime()
             exp.trigger_log.write(
                 f"{timestamp:.6f}\t'nan'\t'Stop-all'\t{trigger_code}\n" # HARDCODING

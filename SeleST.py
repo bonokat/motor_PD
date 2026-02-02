@@ -57,7 +57,8 @@ for thisBlock in trialInfo.blockList: # iterate over blocks
         if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for trial start            
 #            exp.ser.write('WRITE 1 5000 0\n'.encode('utf-8'))
             trigger_code = 1
-            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+            exp.ser.write(bytes([trigger_code]))
             timestamp = exp.trialClock.getTime()
             exp.trigger_log.write(
                 f"{timestamp:.6f}\t{trialInfo.trialCount}\t{thisTrial.trialName}\t{trigger_code}\n"
@@ -75,7 +76,8 @@ for thisBlock in trialInfo.blockList: # iterate over blocks
         if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for trial start (bar starts filling)            
 #            exp.ser.write('WRITE 2 5000 0\n'.encode('utf-8'))   
             trigger_code = 2
-            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+            exp.ser.write(bytes([trigger_code]))
             timestamp = exp.trialClock.getTime()
             exp.trigger_log.write(
                 f"{timestamp:.6f}\t{trialInfo.trialCount}\t{thisTrial.trialName}\t{trigger_code}\n"
@@ -94,7 +96,8 @@ for thisBlock in trialInfo.blockList: # iterate over blocks
         if exp.advSettings['Send serial trigger at trial onset?'] == True: # serial trigger for trial end            
 #            exp.ser.write('WRITE 6 5000 0\n'.encode('utf-8'))
             trigger_code = 6
-            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+#            exp.ser.write(f"WRITE {trigger_code} 5000 0\n".encode("utf-8"))
+            exp.ser.write(bytes([trigger_code]))
             timestamp = exp.trialClock.getTime()
             exp.trigger_log.write(
                 f"{timestamp:.6f}\t{trialInfo.trialCount}\t{thisTrial.trialName}\t{trigger_code}\n"

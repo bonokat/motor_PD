@@ -76,7 +76,7 @@ class Experiment():
             'n blocks': 12, # number of blocks to repeat the above trial arrangement over
             'n forced go trials': 3, # number of go trials to force at the start of each block
             'Staircase stop-signal delays?': True, # option to use staircased SSDs, SSDs will be fixed if not selected
-            'Stop-signal delay step-size (ms)': 50, # step size to change stop-signal delay by if staircasing is enabled
+            'Stop-signal delay step-size (ms)': 25, # step size to change stop-signal delay by if staircasing is enabled
             'Change advanced settings?': True} # option to change advanced settings via GUI              
         if self.taskInfo['Change general settings?']:
             dlg=gui.DlgFromDict(dictionary=self.genSettings, title='SeleST (general settings)', # Create GUI for expInfo dictionary w/ tool tips
@@ -97,11 +97,9 @@ class Experiment():
 
         # Create dictionary with advanced task settings (default settings dependent on paradigm)
         if self.taskInfo['Paradigm'] == 'ARI': # default settings for ARI
-            Defaults = {'Target time (ms)': 800, 'Trial length (s)': 1.25, 'Variable delay lower limit (s)':0.5, 'Variable delay upper limit (s)': 1, 'Fixed delay length (s)': 0.5, 'Stop-both time (ms)': 600,
-                        'Stop-left time (ms)': 550, 'Stop-right time (ms)': 550, 'Lower stop-limit (ms)': 150, 'Upper stop-limit (ms)': 50, 'Positional stop signal': False, 'Target position': 0.8, 'Stimulus size (cm)': 15}
+            Defaults = {'Target time (ms)': 800, 'Trial length (s)': 1.25, 'Variable delay lower limit (s)':0.5, 'Variable delay upper limit (s)': 1, 'Fixed delay length (s)': 0.5, 'Stop-both time (ms)': 450, 'Stop-left time (ms)': 450, 'Stop-right time (ms)': 450, 'Lower stop-limit (ms)': 150, 'Upper stop-limit (ms)': 50, 'Positional stop signal': False, 'Target position': 0.8, 'Stimulus size (cm)': 15}
         elif self.taskInfo['Paradigm'] == 'SST': # default settings for SST
-            Defaults = {'Target time (ms)': 0, 'Trial length (s)': 1.25, 'Variable delay lower limit (s)':0.5, 'Variable delay upper limit (s)': 1, 'Fixed delay length (s)': 1, 'Stop-both time (ms)': 175,
-                        'Stop-left time (ms)': 175, 'Stop-right time (ms)': 175, 'Lower stop-limit (ms)': 50, 'Upper stop-limit (ms)': -500, 'Positional stop signal': False, 'Target position': 0.8, 'Stimulus size (cm)': 5}        
+            Defaults = {'Target time (ms)': 0, 'Trial length (s)': 1.25, 'Variable delay lower limit (s)':0.5, 'Variable delay upper limit (s)': 1, 'Fixed delay length (s)': 1, 'Stop-both time (ms)': 175, 'Stop-left time (ms)': 175, 'Stop-right time (ms)': 175, 'Lower stop-limit (ms)': 50, 'Upper stop-limit (ms)': -500, 'Positional stop signal': False, 'Target position': 0.8, 'Stimulus size (cm)': 5}        
         self.advSettings = {
             'Send serial trigger at trial onset?': True, # option to send serial trigger at trial onset (NOTE: a compatible serial device will need to be set up before this works)
             'Left response key': '1', # response key for left stimulus
@@ -110,8 +108,8 @@ class Experiment():
             'Right 2 response key': 'm', # response key for right stimulus 2
             'Target time (ms)': Defaults['Target time (ms)'], # ARI ONLY: target time for responses
             'Trial length (s)': Defaults['Trial length (s)'], # length of trial
-            'Feedback duration (s)': 0.5, # length of feedback period (NOTE: this time will NOT be included if trial-by-trial feedback is disabled)
-            'Intertrial interval (s)': 0.5, # length of intertrial interval
+            'Feedback duration (s)': 0.75, # length of feedback period (NOTE: this time will NOT be included if trial-by-trial feedback is disabled)
+            'Intertrial interval (s)': 0.75, # length of intertrial interval
             'Blank intertrial interval?': False, # whether to keep (True) or wipe (False) stimuli on screen during ITI
             'Fixed delay?': False, # option to use fixed start delay, if false, random uniform delay is used
             'Variable delay lower limit (s)': Defaults['Variable delay lower limit (s)'],
@@ -197,7 +195,7 @@ class Experiment():
 #        self.trigger_log = None
         if self.advSettings['Send serial trigger at trial onset?'] == True:
             # e.g.
-            self.ser = serial.Serial('COM4', baudrate=128000, timeout=0.01) # 9600, timeout=0) # NEW
+            self.ser = serial.Serial('COM5', baudrate=9600, timeout=0) # 9600, timeout=0) # NEW
             
             # -------------------------------
             # NEW: Trigger logger (attach to self)
